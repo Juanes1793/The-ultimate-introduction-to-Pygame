@@ -9,12 +9,17 @@ test_font = pygame.font.Font("font/Pixeltype.ttf", 50)
 
 ground_surface = pygame.image.load("graphics/ground.png").convert()
 sky_surface = pygame.image.load("graphics/Sky.png").convert()
+
 text_surface = test_font.render("My First Game", False, "Black")
+text_rect = text_surface.get_rect(center=(400, 50))
 
 snail_surface = pygame.image.load("graphics/snail/snail2.png").convert_alpha()
-snail_x_position = 600
+snail_rect = snail_surface.get_rect(midbottom=(600, 300))
+
 
 player_surface = pygame.image.load("graphics/Player/player_walk_1.png").convert_alpha()
+player_rect = player_surface.get_rect(midbottom=(80, 300))
+
 
 while True:
     for event in pygame.event.get():
@@ -24,12 +29,14 @@ while True:
     
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
-    screen.blit(text_surface, (300, 50))
-    snail_x_position -= 4
-    if snail_x_position <= -100:
-        snail_x_position = 800
-    screen.blit(snail_surface, (snail_x_position, 250))
-    screen.blit(player_surface, (80, 200))
+    screen.blit(text_surface, text_rect)
+    snail_rect.left -= 4
+    if snail_rect.right <= -100:
+        snail_rect.left = 800
+    screen.blit(snail_surface, snail_rect)
+    screen.blit(player_surface, player_rect)
+
+
 
 
     pygame.display.update()
